@@ -19,9 +19,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         self.view.addSubview(redRect)
         self.animater? = UIDynamicAnimator(referenceView: self.view)
-        var items:Array = [self.redRect]
-        var gravityBehavior = UIGravityBehavior(items: items)
-        var collisionBehavior = UICollisionBehavior(items: items)
+        var gravityBehavior = UIGravityBehavior(items: [self.redRect])
+        var collisionBehavior = UICollisionBehavior(items: [self.redRect])
         collisionBehavior.translatesReferenceBoundsIntoBoundary = true
         
         self.animater?.addBehavior(gravityBehavior)
@@ -46,7 +45,8 @@ class ViewController: UIViewController {
     
     private func layoutRedRect() {
         redRect.frame.size = CGSizeMake(50,50)
-        redRect.frame.origin.x = self.view.frame.size.width - redRect.frame.size.width
+        //redRect.frame.origin.x = self.view.frame.size.width - redRect.frame.size.width
+        redRect.center.x = self.view.center.x
         redRect.center.y = self.view.center.y
     }
 
