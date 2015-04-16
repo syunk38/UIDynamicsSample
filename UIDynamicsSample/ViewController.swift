@@ -9,15 +9,38 @@
 import UIKit
 
 class ViewController: UIViewController {
+    lazy private var redRect:UIView  = self.createRedRect()
+    var animater:UIDynamicAnimator
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        self.view.addSubview(redRect)
+        self.animater = UIDynamicAnimator(referenceView: self.view)
+        
+        var gravityBehavior = UIGravityBehavior()
+        var collisionBehavior = UICollisionBehavior()
+        
+    }
+    
+    override func viewDidLayoutSubviews() {
+        self.layoutRedRect()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    private func createRedRect() ->UIView {
+        let rect = UIView(frame: CGRectZero)
+        rect.backgroundColor = UIColor.redColor()
+        return rect;
+    }
+    
+    private func layoutRedRect() {
+        redRect.frame.size = CGSizeMake(50,50)
+        redRect.frame.origin.x = self.view.frame.size.width - redRect.frame.size.width
+        redRect.center.y = self.view.center.y
     }
 
 
