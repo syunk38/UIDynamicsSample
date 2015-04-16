@@ -6,6 +6,9 @@
 //  Copyright (c) 2015年 Shuntaro Kuroki. All rights reserved.
 //
 
+//参考
+//http://dev.classmethod.jp/references/ios7-uidynamic-1/
+
 import UIKit
 
 class ViewController: UIViewController {
