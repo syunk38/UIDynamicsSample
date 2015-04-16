@@ -9,16 +9,20 @@
 import UIKit
 
 class ViewController: UIViewController {
-    lazy private var redRect:UIView  = self.createRedRect()
-    var animater:UIDynamicAnimator
-
+    lazy private var redRect:UIView = self.createRedRect()
+    var animater:UIDynamicAnimator?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.addSubview(redRect)
-        self.animater = UIDynamicAnimator(referenceView: self.view)
+        self.animater? = UIDynamicAnimator(referenceView: self.view)
+        var items:Array = [self.redRect]
+        var gravityBehavior = UIGravityBehavior(items: items)
+        var collisionBehavior = UICollisionBehavior(items: items)
+        collisionBehavior.translatesReferenceBoundsIntoBoundary = true
         
-        var gravityBehavior = UIGravityBehavior()
-        var collisionBehavior = UICollisionBehavior()
+        self.animater?.addBehavior(gravityBehavior)
+        self.animater?.addBehavior(collisionBehavior)
         
     }
     
