@@ -18,6 +18,11 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.addSubview(redRect)
+        
+    }
+    
+    override func viewDidLayoutSubviews() {
+        self.layoutRedRect()
         self.animater? = UIDynamicAnimator(referenceView: self.view)
         var gravityBehavior = UIGravityBehavior(items: [self.redRect])
         var collisionBehavior = UICollisionBehavior(items: [self.redRect])
@@ -25,11 +30,6 @@ class ViewController: UIViewController {
         
         self.animater?.addBehavior(gravityBehavior)
         self.animater?.addBehavior(collisionBehavior)
-        
-    }
-    
-    override func viewDidLayoutSubviews() {
-        self.layoutRedRect()
     }
 
     override func didReceiveMemoryWarning() {
