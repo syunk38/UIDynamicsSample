@@ -13,25 +13,15 @@ import UIKit
 
 class ViewController: UIViewController {
     lazy private var redRect:UIView = self.createRedRect()
-    lazy private var animater:UIDynamicAnimator = {
-        return UIDynamicAnimator(referenceView: self.view)
-    }()
+    @IBOutlet private var blueRect:UIView?
+    var animater:UIDynamicAnimator?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.addSubview(redRect)
-        
-    }
-    
-    override func viewDidLayoutSubviews() {
         self.layoutRedRect()
-        //self.animater = UIDynamicAnimator(referenceView: self.view)
-        var gravityBehavior = UIGravityBehavior(items: [self.redRect])
-        var collisionBehavior = UICollisionBehavior(items: [self.redRect])
-        collisionBehavior.translatesReferenceBoundsIntoBoundary = true
-        
-        self.animater.addBehavior(gravityBehavior)
-        self.animater.addBehavior(collisionBehavior)
+        setRedRectAnimateBehavior()
+        setBlueRectAnimateBehavior()
     }
 
     override func didReceiveMemoryWarning() {
@@ -50,6 +40,25 @@ class ViewController: UIViewController {
         //redRect.frame.origin.x = self.view.frame.size.width - redRect.frame.size.width
         redRect.center.x = self.view.center.x
         redRect.center.y = self.view.center.y
+    }
+    
+    private func setRedRectAnimateBehavior() {
+        animater = UIDynamicAnimator(referenceView: self.view)
+        var gravityBehavior = UIGravityBehavior(items: [self.redRect])
+        var collisionBehavior = UICollisionBehavior(items: [self.redRect])
+        collisionBehavior.translatesReferenceBoundsIntoBoundary = true
+        animater!.addBehavior(gravityBehavior)
+        animater!.addBehavior(collisionBehavior)
+    }
+    
+    private func setBlueRectAnimateBehavior() {
+        animater = UIDynamicAnimator(referenceView: self.view)
+        var gravityBehavior = UIGravityBehavior(items: [self.blueRect!])
+        gravityBehavior.angle = 9.0
+        var collisionBehavior = UICollisionBehavior(items: [self.blueRect!])
+        collisionBehavior.translatesReferenceBoundsIntoBoundary = true
+        self.animater!.addBehavior(gravityBehavior)
+        self.animater!.addBehavior(collisionBehavior)
     }
 
 
